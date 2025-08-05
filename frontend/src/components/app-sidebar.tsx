@@ -23,7 +23,7 @@ export function AppSidebar({ state }: { state: boolean }) {
       </Link>
 
       <Link
-        href={"/educational"}
+        href={"/education"}
         className={"hover:bg-accent p-3 rounded flex items-center"}
       >
         <BookOpen />

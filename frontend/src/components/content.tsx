@@ -1,14 +1,28 @@
-"use server";
 
 import { newsCardProps } from "@/lib/utils";
 import NewsCard from "./newsCard";
 import { Headlines } from "./headlines";
 import axios from "axios";
 
-export default async function PageContent({ category }: { category: string }) {
-  const response = await axios.get("http://127.0.0.1:8000/home");
+async function newsFetcher({endpoint} : {endpoint : string}) : Promise<newsCardProps[]> {
+  try {
+    const response = await axios.get(`http://127.0.0.1:8000/${endpoint}`);
+    const data : newsCardProps[] = response.data;
+    return data;
+  }
+  catch(error) {
+    console.log(error);
+    return [];
+  }
+}
 
-  const newsInstances: newsCardProps[] = response.data
+export default async function PageContent({ category }: { category: string }) {
+  let endpoint = 'home';
+  if(category) endpoint = category;
+
+  const response : newsCardProps[] = await newsFetcher({endpoint});
+
+  const newsInstances: newsCardProps[] = response
     .filter((newsInstance: newsCardProps) => {
       if (!newsInstance.urlToImage) {
         return false;

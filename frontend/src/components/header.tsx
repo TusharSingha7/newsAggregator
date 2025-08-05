@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { UserCircle, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import Link from "next/link";
-import { Dispatch, SetStateAction , useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { ModeToggle } from "./toggleButton";
 import { useRouter } from "next/navigation";
 
@@ -14,8 +14,7 @@ export default function Header({
   isSidebarOpen: boolean;
   setSidebarOpen: Dispatch<SetStateAction<boolean>>;
 }) {
-
-  const [searchValue , setSearchValue] = useState<string>();
+  const [searchValue, setSearchValue] = useState<string>();
   const router = useRouter();
 
   return (
@@ -50,19 +49,23 @@ export default function Header({
       </Link>
       <div className="flex-1 mx-4">
         <div className="relative">
-          <form onSubmit={(e)=> {
-            e.preventDefault();
-            if(searchValue) {
-              router.push(`/search?q=${searchValue}`);
-            }
-          }} >
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (searchValue) {
+                router.push(`/search?q=${searchValue}`);
+              }
+            }}
+          >
             <input
               className="w-full bg-muted rounded-full pl-4 pr-10 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
               type="text"
               placeholder="Search..."
               autoComplete="off"
-              onChange={(e)=> {
-                setSearchValue(()=> {return e.target.value});
+              onChange={(e) => {
+                setSearchValue(() => {
+                  return e.target.value;
+                });
               }}
             />
           </form>

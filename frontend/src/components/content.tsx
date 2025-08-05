@@ -1,26 +1,28 @@
-
 import { newsCardProps } from "@/lib/utils";
 import NewsCard from "./newsCard";
 import { Headlines } from "./headlines";
 import axios from "axios";
 
-async function newsFetcher({endpoint} : {endpoint : string}) : Promise<newsCardProps[]> {
+async function newsFetcher({
+  endpoint,
+}: {
+  endpoint: string;
+}): Promise<newsCardProps[]> {
   try {
     const response = await axios.get(`http://127.0.0.1:8000/${endpoint}`);
-    const data : newsCardProps[] = response.data;
+    const data: newsCardProps[] = response.data;
     return data;
-  }
-  catch(error) {
+  } catch (error) {
     console.log(error);
     return [];
   }
 }
 
 export default async function PageContent({ category }: { category: string }) {
-  let endpoint = 'home';
-  if(category) endpoint = category;
+  let endpoint = "home";
+  if (category) endpoint = category;
 
-  const response : newsCardProps[] = await newsFetcher({endpoint});
+  const response: newsCardProps[] = await newsFetcher({ endpoint });
 
   const newsInstances: newsCardProps[] = response
     .filter((newsInstance: newsCardProps) => {

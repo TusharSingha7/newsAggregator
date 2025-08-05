@@ -1,10 +1,5 @@
-
-import PageContent from "@/components/content"
+import PageContent from "@/components/content";
 
 export default async function Sports() {
-
-    return (
-            <PageContent category="" />
-        )
-
+  return <PageContent category="" />;
 }

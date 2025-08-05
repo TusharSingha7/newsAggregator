@@ -27,7 +27,7 @@ export default function RootLayout({
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <html lang="en" className="h-full" suppressHydrationWarning >
+    <html lang="en" className="h-full" suppressHydrationWarning>
       <body
         className={cn(
           geistSans.variable,
@@ -42,7 +42,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="flex flex-col h-full">
-            <Header isSidebarOpen={isSidebarOpen} setSidebarOpen={setSidebarOpen} />
+            <Header
+              isSidebarOpen={isSidebarOpen}
+              setSidebarOpen={setSidebarOpen}
+            />
 
             <div className="flex flex-1 overflow-hidden">
               <aside
@@ -51,7 +54,7 @@ export default function RootLayout({
                   isSidebarOpen ? "w-64" : "w-18"
                 )}
               >
-              <AppSidebar state={isSidebarOpen} />
+                <AppSidebar state={isSidebarOpen} />
               </aside>
               <main className="flex-1 overflow-y-auto p-4 md:p-6">
                 {children}

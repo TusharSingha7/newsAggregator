@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import {newsCardProps} from "@/lib/utils";
+import { newsCardProps } from "@/lib/utils";
 import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
@@ -11,11 +11,14 @@ import {
 } from "@/components/ui/carousel";
 import NewsCard from "./newsCard";
 
-export default function HeadlinesCarousel( { newsInstances }: { newsInstances: newsCardProps[] }) 
-{
-    return (
+export default function HeadlinesCarousel({
+  newsInstances,
+}: {
+  newsInstances: newsCardProps[];
+}) {
+  return (
     <Carousel
-      className="w-full max-w-full relative rounded-2xl" 
+      className="w-full max-w-full relative rounded-2xl"
       plugins={[Autoplay({ delay: 2000 })]}
     >
       <CarouselContent className="-ml-4 rounded-2xl">

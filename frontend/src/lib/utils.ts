@@ -16,5 +16,6 @@ export type newsCardProps = {
   url : string,
   urlToImage : string,
   publishedAt : Date,
-  content : string
+  content : string,
+  embedding? : number[]
 }

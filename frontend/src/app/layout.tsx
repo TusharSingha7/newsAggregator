@@ -3,11 +3,12 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { AppSidebar } from "@/components/app-sidebar";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/header";
+import {v4} from 'uuid'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,6 +26,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
+
+  useEffect(()=>{
+    if(!localStorage.getItem('user--id')) {
+      const user_id = v4()
+      localStorage.setItem('user--id',user_id)
+    }
+  },[])
 
   return (
     <html lang="en" className="h-full" suppressHydrationWarning>

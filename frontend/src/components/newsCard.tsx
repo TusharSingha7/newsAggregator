@@ -1,5 +1,7 @@
+"use client"
 import Image from "next/image";
 import { newsCardProps } from "@/lib/utils";
+import axios from "axios";
 
 export default function NewsCard({
   newsInstance,
@@ -16,6 +18,22 @@ export default function NewsCard({
           target="_blank"
           rel="noopener noreferrer"
           className="relative flex-grow" // Use flex-grow to fill available space
+          onClick={async ()=>{
+            //send a request to backend
+            console.log(newsInstance.embedding)
+            if(!newsInstance.embedding || !localStorage.getItem('user--id')) return;
+            try{
+                const response = await axios.post('http://localhost:8000/store',{
+                userId: localStorage.getItem('user--id'),
+                embedding : newsInstance.embedding
+                });
+                if(response) console.log("posted" , newsInstance.embedding)
+            }
+            catch(e) {
+              console.log("error posting" , e)
+            }
+            
+          }}
         >
           <Image
             src={newsInstance.urlToImage!} // We can use ! because we filtered nulls

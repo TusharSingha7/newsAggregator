@@ -23,7 +23,7 @@ export default function NewsCard({
             console.log(newsInstance.embedding)
             if(!newsInstance.embedding || !localStorage.getItem('user--id')) return;
             try{
-                const response = await axios.post('http://localhost:8000/store',{
+                const response = await axios.post('https://newsaggregator.tushar-server.diy/store',{
                 userId: localStorage.getItem('user--id'),
                 embedding : newsInstance.embedding
                 });

@@ -12,7 +12,7 @@ export default function Body({ category = "" }: { category: string }) {
     const userId = localStorage.getItem("user--id");
     try {
       const response = axios.get(
-        `http://localhost:8000/everything${category}?userId=${userId}`
+        `https://newsaggregator.tushar-server.diy/everything${category}?userId=${userId}`
       );
 
       response.then((res) => {

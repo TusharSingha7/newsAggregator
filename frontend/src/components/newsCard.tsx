@@ -8,6 +8,7 @@ export default function NewsCard({
 }: {
   newsInstance: newsCardProps;
 }) {
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
   return (
     <div className="p-1">
       {/* 1. The card is a flex column and has a defined height */}
@@ -20,10 +21,10 @@ export default function NewsCard({
           className="relative flex-grow" // Use flex-grow to fill available space
           onClick={async ()=>{
             //send a request to backend
-            console.log(newsInstance.embedding)
+            // console.log(newsInstance.embedding)
             if(!newsInstance.embedding || !localStorage.getItem('user--id')) return;
             try{
-                const response = await axios.post('https://newsaggregator.tushar-server.diy/store',{
+                const response = await axios.post(`${BASE_URL}/store`,{
                 userId: localStorage.getItem('user--id'),
                 embedding : newsInstance.embedding
                 });

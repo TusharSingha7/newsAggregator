@@ -7,12 +7,15 @@ import { useEffect, useState } from "react";
 
 export default function Body({ category = "" }: { category: string }) {
   const [newsInstances, setNewsInstances] = useState<newsCardProps[]>([]);
-
   useEffect(() => {
     const userId = localStorage.getItem("user--id");
+    const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
+    console.log(BASE_URL)
+
     try {
       const response = axios.get(
-        `https://newsaggregator.tushar-server.diy/everything${category}?userId=${userId}`
+        `${BASE_URL}/everything${category}?userId=${userId}`
       );
 
       response.then((res) => {

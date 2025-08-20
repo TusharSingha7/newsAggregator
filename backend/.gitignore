@@ -1,51 +1,29 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
-
-# Virtual environment
-venv/
-env/
-.venv/
-.env/
-ENV/
-env.bak/
-venv.bak/
-
-# Flask-related
-instance/
-*.db
-*.sqlite3
-
 # Environment variables
+# Keep secret keys and database URLs out of version control!
 .env
-.env.*
+*.env
 
-# PyInstaller
-*.manifest
-*.spec
+# Python virtual environment
+# Never commit your virtual environment folder
+venv/
+.venv/
+env/
 
-# Unit test / coverage
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
+# Python bytecode and cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Editor-specific files
+# For VSCode and PyCharm/IntelliJ
+.vscode/
+.idea/
 
 # Log files
 *.log
 
-# Editor directories and files
-.vscode/
-.idea/
-*.sublime-project
-*.sublime-workspace
-
-# Mac and Linux OS junk
-.DS_Store
-Thumbs.db
+# Build and distribution artifacts
+build/
+dist/
+*.egg-info/

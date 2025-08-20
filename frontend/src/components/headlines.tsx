@@ -24,7 +24,8 @@ export const Headlines = async ({
 }: {
   category : string
 }) => {
-  const headlinesResponse: newsCardProps[] = await newsFetcher({url:`https://newsaggregator.tushar-server.diy/top-headlines${category}`});
+  const BASE_URL = process.env.BASE_URL;
+  const headlinesResponse: newsCardProps[] = await newsFetcher({url:`${BASE_URL}/top-headlines${category}`});
   const headlineInstances: newsCardProps[] = headlinesResponse
     .filter((newsInstance: newsCardProps) => {
       if (!newsInstance.urlToImage) {

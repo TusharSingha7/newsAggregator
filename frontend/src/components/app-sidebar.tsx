@@ -1,4 +1,4 @@
-import { BookOpen, Gavel, Trophy, Tv } from "lucide-react";
+import { Atom, Briefcase, Cpu, Globe, HeartPlusIcon, Trophy, Tv } from "lucide-react";
 import Link from "next/link";
 
 export function AppSidebar({ state }: { state: boolean }) {
@@ -12,19 +12,19 @@ export function AppSidebar({ state }: { state: boolean }) {
   return (
     <div className="flex flex-col h-full pt-5 gap-2 pl-2">
       <Link
-        href={"/politics"}
+        href={"/business"}
         className={"hover:bg-accent p-3 rounded flex items-center"}
       >
-        <Gavel />
-        <span className={getSpanClasses(state)}>Politics</span>
+        <Briefcase />
+        <span className={getSpanClasses(state)}>Business</span>
       </Link>
 
       <Link
-        href={"/education"}
+        href={"/general"}
         className={"hover:bg-accent p-3 rounded flex items-center"}
       >
-        <BookOpen />
-        <span className={getSpanClasses(state)}>Educational</span>
+        <Globe />
+        <span className={getSpanClasses(state)}>General</span>
       </Link>
 
       <Link
@@ -41,6 +41,27 @@ export function AppSidebar({ state }: { state: boolean }) {
       >
         <Tv />
         <span className={getSpanClasses(state)}>Entertainment</span>
+      </Link>
+      <Link
+        href={"/health"}
+        className={"hover:bg-accent p-3 rounded flex items-center"}
+      >
+        <HeartPlusIcon />
+        <span className={getSpanClasses(state)}>Health</span>
+      </Link>
+      <Link
+        href={"/science"}
+        className={"hover:bg-accent p-3 rounded flex items-center"}
+      >
+        <Atom />
+        <span className={getSpanClasses(state)}>Science</span>
+      </Link>
+      <Link
+        href={"/technology"}
+        className={"hover:bg-accent p-3 rounded flex items-center"}
+      >
+        <Cpu />
+        <span className={getSpanClasses(state)}>Technology</span>
       </Link>
     </div>
   );

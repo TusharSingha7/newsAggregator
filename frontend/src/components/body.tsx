@@ -11,16 +11,19 @@ export default function Body({ category = "" }: { category: string }) {
     const userId = localStorage.getItem("user--id");
     const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-    console.log(BASE_URL)
-
     try {
       const response = axios.get(
         `${BASE_URL}/everything${category}?userId=${userId}`
       );
 
       response.then((res) => {
+        const seen = new Set<string>();
         setNewsInstances(() => {
-          return res.data;
+          return res.data.filter((item : newsCardProps) => {
+            if(seen.has(item.url) || !item.urlToImage) return false;
+            seen.add(item.url);
+            return true;
+          })
         });
       });
     } catch (error) {

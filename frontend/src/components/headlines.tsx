@@ -1,8 +1,9 @@
-
+"use client";
 
 import { newsCardProps } from "@/lib/utils";
 import HeadlinesCarousel from "./headlinesCarousel";
 import axios from "axios";
+import { useState , useEffect } from "react";
 
 async function newsFetcher({
   url,
@@ -12,42 +13,37 @@ async function newsFetcher({
   try {
     const response = await axios.get(url);
     const data: newsCardProps[] = response.data || [];
-    return data;
+    const seenUrls = new Set<string>();
+    return data.filter((item: newsCardProps) => {
+      if(seenUrls.has(item.url) || !item.urlToImage) return false;
+      seenUrls.add(item.url);
+      return true;
+    })
   } catch (error) {
     console.log(error);
     return [];
   }
 }
 
-export const Headlines = async ({
+export const Headlines = ({
   category,
 }: {
   category : string
 }) => {
-  const BASE_URL = process.env.BASE_URL;
-  const headlinesResponse: newsCardProps[] = await newsFetcher({url:`${BASE_URL}/top-headlines${category}`});
-  const headlineInstances: newsCardProps[] = headlinesResponse
-    .filter((newsInstance: newsCardProps) => {
-      if (!newsInstance.urlToImage) {
-        return false;
-      }
-      return true;
+
+  const [headlines , setHeadlines] = useState<newsCardProps[]>([]);
+
+  useEffect(()=> {
+    const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+    if(!BASE_URL) return;
+
+    newsFetcher({url:`${BASE_URL}/top-headlines${category}`}).then((data)=> {
+      setHeadlines(()=> {
+        return data;
+      });
     })
-    .map((newsInstance: newsCardProps) => {
-      return {
-        source: {
-          id: newsInstance.source.id,
-          name: newsInstance.source.name,
-        },
-        author: newsInstance.author,
-        title: newsInstance.title,
-        description: newsInstance.description,
-        url: newsInstance.url,
-        urlToImage: newsInstance.urlToImage,
-        publishedAt: newsInstance.publishedAt,
-        content: newsInstance.content,
-        embedding : newsInstance.embedding || []
-      };
-    });
-  return <HeadlinesCarousel newsInstances={headlineInstances} />;
+
+  },[category])
+
+  return <HeadlinesCarousel newsInstances={headlines} />;
 };
